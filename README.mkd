@@ -10,8 +10,13 @@ By default it uses the current pages url `window.location.href`.
 Requires less.js and coffee-script, both available with node package manager.
 
 > $ npm install less coffee-script
+
 > $ cake build
 
-And then just call it from the element you want the comments to show up in
+And then just call it from the element you want the comments to show up in.
 
-> $("#Comments").loadHNComments();
+> $("#Comments").loadHNComments(url);
+
+Where `url` is the url that the thread is discussing. 
+
+

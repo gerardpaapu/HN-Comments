@@ -32,7 +32,7 @@ embed_hn_thread = (url, element) ->
             <a class="threadLink" 
                href="http://hackerne.ws/item?id=#{thread.id}">
                     Comment at Hacker News
-            </a>""" # yeah ... I'm not proud
+            </a>""" # yeah ... I'm not proud of all the inline html 
 
         wrapper.append(render_comments thread.comments)
         $(element).append(wrapper)
