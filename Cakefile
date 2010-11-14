@@ -1,18 +1,52 @@
-task 'build', 'put it all together', () ->
-    fs = require "fs"
-    less = require "less"
-    coffee = require "coffee-script"
+fs = require "fs"
+readFile = (name) -> fs.readFileSync name, 'utf-8'
 
-    coffee_src = fs.readFileSync 'src/hn.coffee', 'utf-8'
-    less_src = fs.readFileSync 'src/hn.less', 'utf-8'
+task "all", "a full build", () ->
+    invoke "compile-styles"
+    invoke "compress"
+
+task "compile-coffee", "Compile the coffee sources to javascript.", () ->
+    invoke "create-output-dir"
+
+    coffee = require "coffee-script"
+    src = readFile "src/hn.coffee"
 
     try
-        fs.mkdirSync "build", 0777
+        fs.writeFile "build/hn.js", coffee.compile src
+        console.log "successfully compiled hn.coffee -> hn.js"
     catch err
-        log "The build directory already exists, but that's fine"
+        console.log "error compiling hn.coffee: #{err}"
 
-    fs.writeFile "build/hn.js", coffee.compile coffee_src
+task "compile-styles", "Compile the less source to css", () ->
+    invoke "create-output-dir"
 
-    less.render less_src, (errs, css) ->
-        if errs then log "error compiling hn.less:\n #{errs}"
-        fs.writeFile "build/hn.css", css
+    less = require "less"
+    src = readFile "src/hn.less"
+
+    less.render src, (errs, css) ->
+        if errs
+            console.log "error compiling hn.less:\n #{errs}"
+        else
+            fs.writeFile "build/hn.css", css
+            console.log "successfully compiled hn.less -> hn.css"
+
+task 'create-output-dir', '', () ->
+    try
+        fs.mkdirSync "build", 0777
+        console.log "Created the build directory"
+    catch err
+        console.log "The build directory already exists, but that's fine"
+
+task 'compress', 'squash the javascript file up real nice', () ->
+    invoke 'compile-coffee'
+
+    {parser, uglify} = require "uglify"
+
+    fat_js = readFile "build/hn.js"
+    ast = parser.parse fat_js
+    ast = uglify.ast_mangle ast
+    ast = uglify.ast_squeeze ast
+    final = uglify.gen_code ast
+
+    fs.writeFile "build/hn.min.js", final
+    console.log "compressed hn.js -> hn.min.js"

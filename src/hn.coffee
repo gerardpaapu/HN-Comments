@@ -2,6 +2,7 @@ $ = jQuery
 
 embed_hn_thread = (url, element) ->
     wrapper = $('<div class="hn_comments">Loading comments&hellip;</div>')
+    $(element).append(wrapper)
 
     get_thread_id = (url, callback) ->
         $.ajax
@@ -35,7 +36,6 @@ embed_hn_thread = (url, element) ->
             </a>""" # yeah ... I'm not proud of all the html 
 
         wrapper.append(render_comments thread.comments, thread)
-        $(element).append(wrapper)
 
 render_comment = (comment, thread) ->
     c = comment
@@ -63,6 +63,6 @@ render_comments = (comments, thread) ->
 
     list
 
-jQuery.fn.loadHNComments = (url) ->
+jQuery.fn['loadHNComments'] = (url) ->
     url ?= window.location.href
     embed_hn_thread url, this
