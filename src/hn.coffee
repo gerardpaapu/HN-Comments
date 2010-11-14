@@ -29,7 +29,7 @@ embed_hn_thread = (url, element) ->
     get_thread_by_url url, (thread) ->
         wrapper.empty()
         wrapper.append """
-            <a class="thread_link" 
+            <a class="threadLink" 
                href="http://hackerne.ws/item?id=#{thread.id}">
                     Comment at Hacker News
             </a>""" # yeah ... I'm not proud
@@ -43,7 +43,7 @@ render_comment = (comment) ->
     head = $ '<div class="commentHead" />'
     body = $ '<div class="commentBody" />'
     head.append "#{c.points} points by <a class='username' href='http://hackerne.ws/user?id=#{c.postedBy}'>#{c.postedBy}</a>"
-    head.append " | <a href='http://hackerne.ws/item?id=#{c.id}'>link</a>"
+    head.append """ | <a href="http://hackerne.ws/item?id=#{c.id}">link</a>"""
     body.append comment.comment
     html.append head
     html.append body
