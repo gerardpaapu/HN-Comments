@@ -1,3 +1,3 @@
 $(function (){
-    $('#HNContainer').loadHNComments('http://api.ihackernews.com/');
+    $('#HNContainer').loadHNComments('http://voltier.com/2010/11/12/reddits-astonishin-altruism/');
 });
