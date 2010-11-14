@@ -1,0 +1,25 @@
+.hn_comments p {
+  margin: 1em 0;
+}
+.hn_comments ul.comments {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.hn_comments ul.comments ul.comments {
+  margin: 0.5em 0 0.5em 2em;
+}
+.hn_comments .threadLink {
+  display: block;
+  padding: 0.5em 0;
+}
+.hn_comments .username {
+  font-weight: bold;
+}
+.hn_comments .commentBody, .hn_comments .commentHead, .hn_comments .reply {
+  display: block;
+  padding: 0.5em;
+}
+.hn_comments .commentHead {
+  background: #ccc;
+}
