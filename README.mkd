@@ -9,12 +9,12 @@ It also uses like a million lines of html strings, it makes me want to vomit a l
 
 Requires less.js and coffee-script, both available with node package manager.
 
-    > $ npm install less coffee-script
-    > $ cake build
+    $ npm install less coffee-script
+    $ cake build
 
 And then just call it from the element you want the comments to show up in.
 
-    > $("#Comments").loadHNComments(url);
+    $("#Comments").loadHNComments(url);
 
 Where `url` is the url that the thread is discussing.
 If you call it without arguments default it defaults to the current page's url (`window.location.href`).
