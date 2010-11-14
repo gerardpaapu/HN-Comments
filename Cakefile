@@ -12,6 +12,7 @@ task 'build', 'put it all together', () ->
         log "The build directory already exists, but that's fine"
 
     fs.writeFile "build/hn.js", coffee.compile coffee_src
+
     less.render less_src, (errs, css) ->
         if errs then log "error compiling hn.less:\n #{errs}"
         fs.writeFile "build/hn.css", css

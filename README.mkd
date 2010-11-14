@@ -7,10 +7,13 @@ It uses the highly controversial third-party API from http://api.ihackernews.com
 
 It also uses like a million lines of html strings, it makes me want to vomit a little bit.
 
-Requires less.js and coffee-script, both available with node package manager.
+Requires less.js and coffee-script to build, both are available with node package manager.
 
     $ npm install less coffee-script
     $ cake build
+
+You should find `hn.js` and `hn.css` in the build folder, include them in an internet
+webpage along with jQuery.
 
 And then just call it from the element you want the comments to show up in.
 
