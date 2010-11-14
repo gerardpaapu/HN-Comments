@@ -28,6 +28,12 @@ embed_hn_thread = (url, element) ->
 
     get_thread_by_url url, (thread) ->
         wrapper.empty()
+        wrapper.append """
+            <a class="thread_link" 
+               href="http://hackerne.ws/item?id=#{thread.id}">
+                    Comment at Hacker News
+            </a>""" # yeah ... I'm not proud
+
         wrapper.append(render_comments thread.comments)
         $(element).append(wrapper)
 
