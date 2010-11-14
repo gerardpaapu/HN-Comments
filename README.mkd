@@ -5,7 +5,6 @@ A jQuery plugin that embeds a hacker news thread relating to a particular url in
 
 It uses the highly controversial third-party API from http://api.ihackernews.com/.
 
-
 Requires less.js and coffee-script, both available with node package manager.
 
 > $ npm install less coffee-script
@@ -18,5 +17,3 @@ And then just call it from the element you want the comments to show up in.
 
 Where `url` is the url that the thread is discussing.
 If you call it without arguments default it defaults to the current page's url (`window.location.href`).
-
-
