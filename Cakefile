@@ -1,11 +1,11 @@
 fs = require "fs"
 readFile = (name) -> fs.readFileSync name, 'utf-8'
 
-task "all", "a full build", () ->
-    invoke "compile-styles"
-    invoke "compress"
+task "compile", "compile the script and styles", () ->
+    invoke "compile:coffee"
+    invoke "compile:styles"
 
-task "compile-coffee", "Compile the coffee sources to javascript.", () ->
+task "compile:coffee", "Compile the coffee source to javascript.", () ->
     invoke "create-output-dir"
 
     coffee = require "coffee-script"
@@ -17,7 +17,7 @@ task "compile-coffee", "Compile the coffee sources to javascript.", () ->
     catch err
         console.log "error compiling hn.coffee: #{err}"
 
-task "compile-styles", "Compile the less source to css", () ->
+task "compile:styles", "Compile the less source to css", () ->
     invoke "create-output-dir"
 
     less = require "less"
@@ -30,16 +30,14 @@ task "compile-styles", "Compile the less source to css", () ->
             fs.writeFile "build/hn.css", css
             console.log "successfully compiled hn.less -> hn.css"
 
-task 'create-output-dir', '', () ->
+task "create-output-dir", "creates `build`", () ->
     try
         fs.mkdirSync "build", 0777
         console.log "Created the build directory"
     catch err
         console.log "The build directory already exists, but that's fine"
 
-task 'compress', 'squash the javascript file up real nice', () ->
-    invoke 'compile-coffee'
-
+task "compress", "squash the javascript file up real nice", () ->
     {parser, uglify} = require "uglify"
 
     fat_js = readFile "build/hn.js"

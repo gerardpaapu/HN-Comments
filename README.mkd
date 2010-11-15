@@ -17,7 +17,8 @@ You should find `hn.js` in the build folder. It depends on jQuery (tested with 1
 A more complete build will compile the .less file to css and minify the javascript output.
 
     $ npm install coffee-script less uglify
-    $ cake all
+    $ cake compile
+    $ cake compress
 
 You should find `hn.js`, `hn.min.js` and `hn.css`. Include `hn.min.js` and `hn.css` in your page.
 
