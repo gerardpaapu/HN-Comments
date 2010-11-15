@@ -12,7 +12,7 @@ embed_hn_thread = (url, element) ->
                 url: url
                 format: "jsonp"
 
-            success: (data) -> 
+            success: (data) ->
                 if data.length then callback data[0]
 
     get_thread_by_id = (id, callback) ->
@@ -38,20 +38,25 @@ embed_hn_thread = (url, element) ->
         wrapper.append(render_comments thread.comments, thread)
 
 render_comment = (comment, thread) ->
-    c = comment
     html = $ '<div class="comment" />'
     head = $ '<div class="commentHead" />'
     body = $ '<div class="commentBody" />'
     head.append """
-        #{c.points} points by
-        <a class="username" href="http://hackerne.ws/user?id=#{c.postedBy}">
-            #{c.postedBy}
-        </a>"""
-    head.append """ | <a href="http://hackerne.ws/item?id=#{c.id}">link</a>"""
+        #{comment.points} points by
+        <a class="username" href="http://hackerne.ws/user?id=#{comment.postedBy}">
+            #{comment.postedBy}
+        </a> | <a href="http://hackerne.ws/item?id=#{comment.id}">link</a>
+        """
     body.append comment.comment
     html.append head
     html.append body
-    html.append """<a class="reply" href="http://hackerne.ws/reply?id=#{c.id}&whence=item%3fid%3d#{thread.id}">reply</a>"""
+    html.append """
+    <a class="reply"
+       href="http://hackerne.ws/reply?id=#{comment.id}&whence=item%3fid%3d#{thread.id}">
+       reply
+    </a>
+    """
+
     if comment.children?
         html.append render_comments comment.children, thread
 
