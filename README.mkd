@@ -45,4 +45,4 @@ Include `hn.min.js` and `hn.css` in your page.
 
 ## Licensing
 
-Everything in this repo is copyright (c] 2010, Gerard Paapu and available under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
+Everything in this repo is copyright (c) 2010, Gerard Paapu and available under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
