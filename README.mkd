@@ -3,11 +3,11 @@ HN Comments
 
 A jQuery plugin that embeds a hacker news thread relating to a particular url into your page. 
 
-It uses the highly controversial third-party API from http://api.ihackernews.com/.
+It uses the highly controversial third-party API from [ihackernews](http://api.ihackernews.com/).
 
 It also uses like a million lines of html strings, it makes me want to vomit a little bit.
 
-It's tested against (and requires) jQuery 1.4.4
+It's tested against (and requires) jQuery 1.4.4.
 
 1. [download the minified script](https://github.com/downloads/sharkbrainguy/HN-Comments/hn.min.js)
 2. Add it to your blogosites html (after jQuery)
@@ -16,7 +16,6 @@ It's tested against (and requires) jQuery 1.4.4
         $("#Comments").loadHNComments(url);
 
    If you don't call it with a url, it will use the current page's `window.location.href`.
-
 
 If you have node + npm installed you probably can (and want to) build it from source.
 
@@ -38,4 +37,6 @@ A more complete build will compile the scripts and styles and minify the javascr
     $ cake compile
     $ cake compress
 
-You should find `hn.js`, `hn.min.js` and `hn.css`. Include `hn.min.js` and `hn.css` in your page.
+You should find `hn.js`, `hn.min.js` and `hn.css`.
+
+Include `hn.min.js` and `hn.css` in your page.
