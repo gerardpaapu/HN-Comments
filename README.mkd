@@ -3,6 +3,8 @@ HN Comments
 
 A jQuery plugin that embeds a hacker news thread relating to a particular url into your page. 
 
+[Check out the live demo.](http://gerardpaapu.com/hncomments/)
+
 It uses the highly controversial third-party API from [ihackernews](http://api.ihackernews.com/).
 
 It also uses like a million lines of html strings, it makes me want to vomit a little bit.
