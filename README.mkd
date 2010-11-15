@@ -13,9 +13,9 @@ It's tested against (and requires) jQuery 1.4.4
 2. Add it to your blogosites html (after jQuery)
 3. Call `loadHNComments` from the element you want the comments to appear in.
 
-    $("#Comments").loadHNComments(url);
+        $("#Comments").loadHNComments(url);
 
-If you don't call it with a url, it will use the current page's `window.location.href`.
+   If you don't call it with a url, it will use the current page's `window.location.href`.
 
 
 If you have node + npm installed you probably can (and want to) build it from source.
