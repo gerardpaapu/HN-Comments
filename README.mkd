@@ -32,7 +32,7 @@ If you have `less` you can also build the default styles... (but really they're 
     $ npm install less
     $ cake compile:styles
 
-A more complete build will compile the .less file to css and minify the javascript output.
+A more complete build will compile the scripts and styles and minify the javascript output.
 
     $ npm install coffee-script less uglify
     $ cake compile
