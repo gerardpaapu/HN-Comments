@@ -42,3 +42,7 @@ A more complete build will compile the scripts and styles and minify the javascr
 You should find `hn.js`, `hn.min.js` and `hn.css`.
 
 Include `hn.min.js` and `hn.css` in your page.
+
+## Licensing
+
+Everything in this repo is copyright (c] 2010, Gerard Paapu and available under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
