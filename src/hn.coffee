@@ -42,7 +42,11 @@ render_comment = (comment, thread) ->
     html = $ '<div class="comment" />'
     head = $ '<div class="commentHead" />'
     body = $ '<div class="commentBody" />'
-    head.append "#{c.points} points by <a class='username' href='http://hackerne.ws/user?id=#{c.postedBy}'>#{c.postedBy}</a> "
+    head.append """
+        #{c.points} points by
+        <a class="username" href="http://hackerne.ws/user?id=#{c.postedBy}">
+            #{c.postedBy}
+        </a>"""
     head.append """ | <a href="http://hackerne.ws/item?id=#{c.id}">link</a>"""
     body.append comment.comment
     html.append head
@@ -63,6 +67,6 @@ render_comments = (comments, thread) ->
 
     list
 
-jQuery.fn['loadHNComments'] = (url) ->
+jQuery.fn.loadHNComments = (url) ->
     url ?= window.location.href
     embed_hn_thread url, this
