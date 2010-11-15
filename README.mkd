@@ -7,12 +7,30 @@ It uses the highly controversial third-party API from http://api.ihackernews.com
 
 It also uses like a million lines of html strings, it makes me want to vomit a little bit.
 
+It's tested against (and requires) jQuery 1.4.4
+
+1. [download the minified script](https://github.com/downloads/sharkbrainguy/HN-Comments/hn.min.js)
+2. Add it to your blogosites html (after jQuery)
+3. Call `loadHNComments` from the element you want the comments to appear in.
+
+    $("#Comments").loadHNComments(url);
+
+If you don't call it with a url, it will use the current page's `window.location.href`.
+
+
+If you have node + npm installed you probably can (and want to) build it from source.
+
 A minimal build requires coffeescript.
 
     $ npm install coffeescript
-    $ cake compile-coffee
+    $ cake compile:coffee
 
-You should find `hn.js` in the build folder. It depends on jQuery (tested with 1.4.4).
+You should find `hn.js` in the build folder.
+
+If you have `less` you can also build the default styles... (but really they're nothing special)
+
+    $ npm install less
+    $ cake compile:styles
 
 A more complete build will compile the .less file to css and minify the javascript output.
 
@@ -21,10 +39,3 @@ A more complete build will compile the .less file to css and minify the javascri
     $ cake compress
 
 You should find `hn.js`, `hn.min.js` and `hn.css`. Include `hn.min.js` and `hn.css` in your page.
-
-Call `loadHNComments` from the element you want the comments to appear in.
-
-    $("#Comments").loadHNComments(url);
-
-Where `url` is the url that the thread is discussing.
-If you call it without arguments default it defaults to the current page's url (`window.location.href`).
