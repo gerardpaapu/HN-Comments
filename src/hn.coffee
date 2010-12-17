@@ -38,24 +38,23 @@ embed_hn_thread = (url, element) ->
             #{ render_comments thread.comments, thread }
             """
 
-render_comment = (comment, thread) ->
-    html = """
-        <div class="comment">
-            <div class="commentHead">
-                #{comment.points} points by
-                <a class="username" href="#{site_root}user?id=#{comment.postedBy}">
-                    #{comment.postedBy}
-                </a> | <a href="#{site_root}item?id=#{comment.id}">link</a>
-            </div>
-            <div class="commentBody">
-                #{comment.comment}
-            </div>
-            <a class="reply"
-               href="#{site_root}reply?id=#{comment.id}&whence=item%3fid%3d#{thread.id}">
-               reply
-            </a>
-            #{ render_comments comment.children, thread }
+render_comment = (comment, thread) -> """
+    <div class="comment">
+        <div class="commentHead">
+            #{comment.points} points by
+            <a class="username" href="#{site_root}user?id=#{comment.postedBy}">
+                #{comment.postedBy}
+            </a> | <a href="#{site_root}item?id=#{comment.id}">link</a>
         </div>
+        <div class="commentBody">
+            #{comment.comment}
+        </div>
+        <a class="reply"
+           href="#{site_root}reply?id=#{comment.id}&whence=item%3fid%3d#{thread.id}">
+           reply
+        </a>
+        #{ render_comments comment.children, thread }
+    </div>
     """
 
 render_comments = (comments, thread) ->
