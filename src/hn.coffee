@@ -1,12 +1,16 @@
 $ = jQuery
 
+api_root = "http://api.ihackernews.com/"
+site_root = "http://news.ycombinator.com/"
+
 embed_hn_thread = (url, element) ->
     wrapper = $('<div class="hn_comments">Loading comments&hellip;</div>')
+
     $(element).append(wrapper)
 
     get_thread_id = (url, callback) ->
         $.ajax
-            url: "http://api.ihackernews.com/getid"
+            url: "#{api_root}getid"
             dataType: "jsonp"
             data:
                 url: url
@@ -17,61 +21,50 @@ embed_hn_thread = (url, element) ->
 
     get_thread_by_id = (id, callback) ->
         $.ajax
-            url: "http://api.ihackernews.com/post/#{id}"
+            url: "#{api_root}post/#{id}"
             dataType: "jsonp"
-            data:
-                format: "jsonp"
-
+            data: { format: "jsonp" }
             success: callback
 
     get_thread_by_url = (url, callback) ->
         get_thread_id url, (id) -> get_thread_by_id id, callback
 
     get_thread_by_url url, (thread) ->
-        wrapper.empty()
-        wrapper.append """
+        wrapper.html """
             <a class="threadLink" 
-               href="http://news.ycombinator.com/item?id=#{thread.id}">
+               href="#{site_root}item?id=#{thread.id}">
                     Comment at Hacker News
-            </a>""" # yeah ... I'm not proud of all the html 
-
-        wrapper.append(render_comments thread.comments, thread)
+            </a>
+            #{ render_comments thread.comments, thread }
+            """
 
 render_comment = (comment, thread) ->
-    html = $ '<div class="comment" />'
-    head = $ '<div class="commentHead" />'
-    body = $ '<div class="commentBody" />'
-    head.append """
-        #{comment.points} points by
-        <a class="username" href="http://news.ycombinator.com/user?id=#{comment.postedBy}">
-            #{comment.postedBy}
-        </a> | <a href="http://news.ycombinator.com/item?id=#{comment.id}">link</a>
-        """
-    body.append comment.comment
-    html.append head
-    html.append body
-    html.append """
-    <a class="reply"
-       href="http://news.ycombinator.com/reply?id=#{comment.id}&whence=item%3fid%3d#{thread.id}">
-       reply
-    </a>
+    html = """
+        <div class="comment">
+            <div class="commentHead">
+                #{comment.points} points by
+                <a class="username" href="#{site_root}user?id=#{comment.postedBy}">
+                    #{comment.postedBy}
+                </a> | <a href="#{site_root}item?id=#{comment.id}">link</a>
+            </div>
+            <div class="commentBody">
+                #{comment.comment}
+            </div>
+            <a class="reply"
+               href="#{site_root}reply?id=#{comment.id}&whence=item%3fid%3d#{thread.id}">
+               reply
+            </a>
+            #{ render_comments comment.children, thread }
+        </div>
     """
 
-    if comment.children?
-        html.append render_comments comment.children, thread
-
-    html
-
 render_comments = (comments, thread) ->
-    list = $ '<ul class="comments" />'
+    return "" unless comments?
 
-    for comment in comments
-        item = $ '<li />'
-        item.append render_comment comment, thread
-        list.append item
+    items = for comment in comments
+        "<li>#{ render_comment comment, thread }</li>"
 
-    list
+    """<ul class="comments">#{ items.join '\n' }</ul>"""
 
-jQuery.fn.loadHNComments = (url) ->
-    url ?= window.location.href
+$.fn.loadHNComments = (url=window.location.href) ->
     embed_hn_thread url, this
